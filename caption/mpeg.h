@@ -204,6 +204,10 @@ libcaption_stauts_t sei_from_caption_clear(sei_t* sei);
 /*! \brief
     \param
 */
+libcaption_stauts_t sei_from_caption_pad(sei_t* sei);
+/*! \brief
+    \param
+*/
 libcaption_stauts_t sei_to_caption_frame(sei_t* sei, caption_frame_t* frame);
 ////////////////////////////////////////////////////////////////////////////////
 #ifdef __cplusplus

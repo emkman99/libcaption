@@ -399,6 +399,16 @@ int flvtag_addcaption_text(flvtag_t* tag, const utf8_char_t* text)
     return ret;
 }
 
+int flvtag_addcaption_pad(flvtag_t* tag)
+{
+    sei_t sei;
+    sei_init(&sei, flvtag_pts(tag));
+    sei_from_caption_pad(&sei);
+    int ret = flvtag_addsei(tag, &sei);
+    sei_free(&sei);
+    return ret;
+}
+
 int flvtag_addcaption_scc(flvtag_t* tag, const scc_t* scc)
 {
     sei_t sei;

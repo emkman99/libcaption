@@ -148,6 +148,8 @@ int main(int argc, char** argv)
                 fprintf(stderr, "T: %0.02f: [CAPTIONS CLEARED]\n", timestamp);
                 flvtag_addcaption_text(&tag, NULL);
                 clear_timestamp = -1;
+            } else {
+                flvtag_addcaption_pad(&tag);
             }
         }
 

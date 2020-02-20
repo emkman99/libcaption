@@ -563,6 +563,17 @@ libcaption_stauts_t sei_from_caption_clear(sei_t* sei)
     sei_append_708(sei, &cea708);
     return LIBCAPTION_OK;
 }
+
+libcaption_stauts_t sei_from_caption_pad(sei_t* sei)
+{
+    cea708_t cea708;
+    cea708_init(&cea708, sei->timestamp); // set up a new popon frame
+    cea708_add_cc_data(&cea708, 1, cc_type_ntsc_cc_field_1, 0x0000);
+    cea708_add_cc_data(&cea708, 1, cc_type_ntsc_cc_field_2, 0x0000);
+    sei_append_708(sei, &cea708);
+    return LIBCAPTION_OK;
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // bitstream
 void mpeg_bitstream_init(mpeg_bitstream_t* packet)
