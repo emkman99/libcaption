@@ -361,15 +361,12 @@ int flvtag_addsei(flvtag_t* tag, sei_t* sei)
         data += LENGTH_SIZE + nalu_size;
         size -= LENGTH_SIZE + nalu_size;
 
-        if (6 == nalu_type) {
-            sei_cat(&new_sei, sei, 0); // copy non itu_t_t35 sei messages
-        } else if (new_sei.head && 7 != nalu_type && 8 != nalu_type && 9 != nalu_type) {
+        // Insert captions just before coded slices
+        if (new_sei.head && (1 == nalu_type || 5 == nalu_type)) {
             flvtag_avcwritesei(&new_tag, &new_sei);
-            flvtag_avcwritenal(&new_tag, nalu_data, nalu_size);
             sei_free(&new_sei);
-        } else {
-            flvtag_avcwritenal(&new_tag, nalu_data, nalu_size);
         }
+        flvtag_avcwritenal(&new_tag, nalu_data, nalu_size);
     }
 
     // On the off chance we have an empty frame, we still wish to write the sei
